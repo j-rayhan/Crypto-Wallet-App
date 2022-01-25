@@ -27,7 +27,6 @@ const Tabs = () => {
     isVisible: tab.isTradModeVisible
   }));
   const handleTradTab = () => {
-    console.log('PRINT IN %s=====>', 'Tabs START ***', isVisible);
     dispatch(toggleTab(!isVisible))
   }
     return (
