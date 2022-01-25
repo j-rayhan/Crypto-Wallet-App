@@ -1,14 +1,24 @@
 import React from "react";
 import {
+  Touchable,
     TouchableOpacity,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import { Home, Portfolio, Market, Profile } from "../screens"
-import { COLORS, icons } from "../constants"
+import { COLORS, icons, styles } from "../constants"
 import { TabIcon } from "../components";
 const Tab = createBottomTabNavigator()
-
+const TabBarCustomButton = ({children, onPress}) => {
+  return (
+    <TouchableOpacity
+      style={[styles.container, styles.center]}
+      onPress={onPress}
+      >
+      {children}
+      </TouchableOpacity>
+  )
+}
 const Tabs = () => {
 
     return (
@@ -65,7 +75,15 @@ const Tabs = () => {
                         isTrade={true}
                       />
                     )
-                  }
+                  },
+                  tabBarButton: (props) => (
+                    <TabBarCustomButton
+                      {...props}
+                      onPress={() => console.log(
+                        'Custom btn press'
+                      )}
+                    /> 
+                  )
                 }}
             />
             <Tab.Screen
