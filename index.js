@@ -1,5 +1,6 @@
 /**
  * @format
+ * UI: https://mockittapp.wondershare.com/community/mtkk714ek03lp18?title=crypto-wallet-app
  */
 
 import {AppRegistry} from 'react-native';
