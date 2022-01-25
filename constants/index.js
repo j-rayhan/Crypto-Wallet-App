@@ -1,7 +1,8 @@
 import constants from "./constants";
 import dummyData from "./dummy";
-import theme, { COLORS, SIZES, FONTS } from "./theme";
+import theme, { COLORS, SIZES, FONTS, iconSize } from "./theme";
 import icons from "./icons";
+import styles from "./styles";
 
 export {
     constants,
@@ -10,5 +11,7 @@ export {
     COLORS,
     SIZES,
     FONTS,
+    iconSize,
     icons,
+    styles,
 };

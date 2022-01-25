@@ -55,7 +55,7 @@ export const FONTS = {
     body4: { fontFamily: "Roboto-Regular", fontSize: SIZES.body4, lineHeight: 22 },
     body5: { fontFamily: "Roboto-Regular", fontSize: SIZES.body5, lineHeight: 22 },
 };
-
+export const iconSize = size => ({width: size, height: size});
 const appTheme = { COLORS, SIZES, FONTS };
 
 export default appTheme;
