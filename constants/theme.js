@@ -55,6 +55,22 @@ export const FONTS = {
     body4: { fontFamily: "Roboto-Regular", fontSize: SIZES.body4, lineHeight: 22 },
     body5: { fontFamily: "Roboto-Regular", fontSize: SIZES.body5, lineHeight: 22 },
 };
+
+export const darkTheme = {
+  name: 'dark',
+  backgroundColor1: COLORS.black,
+  textColor: COLORS.white,
+  textColor2: COLORS.primary,
+};
+
+export const lightTheme = {
+  name: 'light',
+  backgroundColor1: COLORS.white,
+  textColor: COLORS.black,
+  textColor2: COLORS.primary,
+};
+
+export const selectedTheme = darkTheme;
 export const iconSize = size => ({width: size, height: size});
 const appTheme = { COLORS, SIZES, FONTS };
 
