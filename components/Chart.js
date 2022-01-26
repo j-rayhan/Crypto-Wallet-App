@@ -148,7 +148,7 @@ const Chart = ({ containerStyle, chartPrices }) => {
                   marginTop: 3,
                   color: COLORS.white,
                   ...FONTS.body5,
-                  lineHight: 15,
+                  lineHeight: 15,
                 }}
               />
             </View>
