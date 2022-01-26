@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { MainLayout } from '.'
-import { BalanceInfo, IconTextButton } from '../components'
+import { BalanceInfo, Chart, IconTextButton } from '../components'
 import { COLORS, icons, SIZES, styles } from '../constants'
 import { getCoinHoldings, getHoldings } from '../store/marketActions'
 
@@ -103,7 +103,12 @@ const Home = () => {
         {/* Header wallet info */}
         {renderWalletInfo()}
         {/* Chart */}
-
+        <Chart
+          containerStyle={{
+            marginTop: SIZES.padding * 2,
+          }}
+          chartPrices={coins[0]?.sparkline_in_7d?.price}
+        />
         {/* Top cryptocurrency */}
       </View>
     </MainLayout>
