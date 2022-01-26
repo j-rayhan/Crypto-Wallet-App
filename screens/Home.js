@@ -97,7 +97,7 @@ const Home = () => {
       </View>
     )
   }
-  const renderCoins = ({ item, index }) => {
+  const renderCoins = ({ item }) => {
     const {
       name,
       image,

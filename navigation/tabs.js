@@ -39,6 +39,7 @@ const Tabs = () => {
                     borderTopColor: "transparent",
                 }
             }}
+            initialRouteName="Portfolio"
         >
             <Tab.Screen
                 name="Home"
