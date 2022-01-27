@@ -26,14 +26,52 @@ const marketTabs = constants.marketTabs.map((item) => ({
   ...item,
   ref: React.createRef(),
 }))
-const Tabs = () => {
+const TabIndicator = ({scrollX, measureLayout}) => {
+  const inputRange = measureLayout.map((_, i) => i * SIZES.width);
+  const translateX = scrollX.interpolate({
+    inputRange,
+    outputRange: measureLayout.map(measure => measure.x)
+  })
   return (
-    <View style={styles.row}>
+    <Animated.View
+      style={{
+        position: 'absolute',
+        left: 0,
+        height: '100%',
+        width: (SIZES.width - (SIZES.radius * 2)) / 2,
+        backgroundColor: COLORS.lightGray,
+        borderRadius: SIZES.radius,
+        transform: [{translateX}]
+      }}
+    />
+  )
+}
+const Tabs = ({scrollX, onTabPress}) => {
+  const [measureLayout, setMeasureLayout] = React.useState([]);
+  const containerRef = React.useRef();
+  React.useEffect(() => {
+    let ml = []
+    marketTabs.forEach(element => {
+      element?.ref?.current?.measureLayout(
+        containerRef.current,
+        (x, y, width, height) => {
+          ml.push({x, y, width, height})
+          if (ml.length === marketTabs.length){
+            setMeasureLayout(ml)
+          }
+        }
+      )
+    });
+  }, [containerRef])
+  return (
+    <View ref={containerRef} style={styles.row}>
+      {/* Tab Indicator */}
+      {measureLayout.length > 0 && <TabIndicator measureLayout={measureLayout} scrollX={scrollX} />}
       {marketTabs.map((tab, index) => (
         <TouchableOpacity
           key={`market_tab_${index}`}
           style={styles.container}
-          // onPress={}
+          onPress={() => onTabPress(index)}
         >
           <View
             ref={tab.ref}
@@ -42,7 +80,6 @@ const Tabs = () => {
               {
                 paddingHorizontal: 15,
                 height: 40,
-                backgroundColor: index == 0 ? COLORS.lightGray : null,
                 borderRadius: SIZES.radius,
               },
             ]}
@@ -60,6 +97,12 @@ const Market = () => {
   const dispatch = useDispatch()
   const [selectedCoin, setSelectedCoin] = React.useState(null)
   const scrollX = React.useRef(new Animated.Value(0)).current
+  const tabScrollViewRef = React.useRef()
+  const onTabPress = React.useCallback(currentIndex => {
+    tabScrollViewRef.current?.scrollToOffset({
+      offset: currentIndex * SIZES.width
+    })
+  })
   useFocusEffect(
     React.useCallback(() => {
       dispatch(getCoinHoldings())
@@ -79,7 +122,7 @@ const Market = () => {
           backgroundColor: COLORS.gray,
         }}
       >
-        <Tabs />
+        <Tabs scrollX={scrollX} onTabPress={onTabPress} />
       </View>
     )
   }
@@ -104,6 +147,7 @@ const Market = () => {
   const renderList = () => {
     return (
       <Animated.FlatList
+        ref={tabScrollViewRef}
         data={marketTabs}
         contentContainerStyle={{
           marginTop: SIZES.padding,
@@ -123,15 +167,12 @@ const Market = () => {
             <View style={[styles.container, { width: SIZES.width }]}>
               <FlatList
                 data={coins}
-                keyExtractor={(item) => `coin_${item.id}`}
+                keyExtractor={(item) => `coin_${item?.id}`}
                 renderItem={({ item, index }) => {
                   const {
                     name,
                     image,
                     current_price,
-                    total,
-                    qty,
-                    symbol,
                     price_change_percentage_7d_in_currency,
                   } = item ?? {}
                   const priceColor =
