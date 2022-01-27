@@ -39,7 +39,7 @@ const Tabs = () => {
                     borderTopColor: "transparent",
                 }
             }}
-            initialRouteName="Portfolio"
+            initialRouteName="Home"
         >
             <Tab.Screen
                 name="Home"
@@ -56,7 +56,7 @@ const Tabs = () => {
                   }
                 }}
                 listeners={{
-                  tabPress: e => {e.preventDefault()}
+                  tabPress: e => {isVisible && e.preventDefault()}
                 }}
             />
             <Tab.Screen
@@ -74,7 +74,7 @@ const Tabs = () => {
                   }
                 }}
                 listeners={{
-                  tabPress: e => {e.preventDefault()}
+                  tabPress: e => {isVisible && e.preventDefault()}
                 }}
             />
             <Tab.Screen
@@ -115,7 +115,7 @@ const Tabs = () => {
                   }
                 }}
                 listeners={{
-                  tabPress: e => {e.preventDefault()}
+                  tabPress: e => {isVisible && e.preventDefault()}
                 }}
             />
             <Tab.Screen
@@ -133,7 +133,7 @@ const Tabs = () => {
                   }
                 }}
                 listeners={{
-                  tabPress: e => {e.preventDefault()}
+                  tabPress: e => {isVisible && e.preventDefault()}
                 }} 
             />
         </Tab.Navigator>

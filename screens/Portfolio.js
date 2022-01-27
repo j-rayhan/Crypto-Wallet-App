@@ -15,8 +15,8 @@ const Portfolio = () => {
       dispatch(getHoldings())
     }, [dispatch])
   )
-  const { isLoading, markets, coins } = useSelector(({ loading, market }) => ({
-    isLoading: loading['MARKETS'] || loading['COINS'],
+  const { isLoading, markets } = useSelector(({ loading, market }) => ({
+    isLoading: loading['MARKETS'],
     markets: market['MARKETS'],
     coins: market['COINS'],
   }))
